@@ -7,7 +7,7 @@ const paths = require('./paths');
 module.exports = {
   entry: [`${paths.src}/index.tsx`],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.scss']
   },
   output: {
     path: paths.build,
