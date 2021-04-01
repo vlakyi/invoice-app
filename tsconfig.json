@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // "rootDir": "./src",
     "outDir": "./build",
     "sourceMap": true,
     "noImplicitAny": true,
@@ -14,7 +13,7 @@
   },
   "include": [
     "./src/**/*"
-],
+  ],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
