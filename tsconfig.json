@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "@types/*.ts"
   ],
   "linterOptions": {
     "exclude": [
