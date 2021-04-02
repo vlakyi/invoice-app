@@ -1,0 +1,15 @@
+.theme-dark {
+  background-color: var(--background-dark);
+
+  .main-page-header {
+    background-color: var(--clr-primary-900);
+
+    & .horizontal-line {
+      background-color: var();
+    }
+
+    & .theme-icon path {
+      fill: var(--icon-color-dark);
+    }
+  }
+}

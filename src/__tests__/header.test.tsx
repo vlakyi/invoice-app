@@ -1,0 +1,13 @@
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import App from '../components/App';
+
+it('checks if user can switch theme', async () => {
+  render(<App />);
+  const moonIcon = screen.getByTestId('moon-icon');
+  expect(moonIcon).toBeInTheDocument();
+
+  fireEvent.click(moonIcon);
+  const sunIcon = screen.getByTestId('sun-icon');
+  expect(sunIcon).toBeInTheDocument();
+});
