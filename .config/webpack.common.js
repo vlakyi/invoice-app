@@ -55,14 +55,14 @@ module.exports = {
       { test: /\.tsx?$/, use: ['ts-loader'] },
 
       // Images: Copy image files to build folder
-      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
+      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, use: 'url-loader' },
 
       // Fonts and SVGs: Inline files
       { test: /\.(woff(2)?|eot|ttf|otf|)$/, type: 'asset/inline' },
       // SVG
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack']
+        use: ['@svgr/webpack', 'url-loader']
       }
     ]
   }
