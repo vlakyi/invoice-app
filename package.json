@@ -13,8 +13,14 @@
     "test:ci": "jest --forceExit --detectOpenHandles --maxWorkers=10"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,js,jsx}": "npm run lint:staged",
-    "*.{scss,css}": "stylelint --fix"
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint:staged",
+      "prettier --write"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ]
   },
   "jest": {
     "preset": "ts-jest",
