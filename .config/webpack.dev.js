@@ -1,8 +1,7 @@
-
-const webpack = require('webpack')
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
-const paths = require('./paths')
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+const paths = require('./paths');
 
 module.exports = merge(common, {
   // Set the mode to development or production
@@ -18,25 +17,34 @@ module.exports = merge(common, {
     open: true,
     compress: true,
     hot: true,
-    port: 8080,
+    port: 8080
   },
 
   module: {
     rules: [
       // Styles: Inject CSS into the head with source maps
       {
-        test: /\.(scss|css)$/,
+        test: /\.module.(s(a|c)ss)$/,
         use: [
           'style-loader',
-          {loader: 'css-loader', options: {sourceMap: true, importLoaders: 1, modules: true }},
-          {loader: 'sass-loader', options: {sourceMap: true}},
-        ],
+          { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1, modules: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } }
+        ]
       },
+      {
+        test: /\.(s(a|c)ss)$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1, modules: false } },
+          { loader: 'sass-loader', options: { sourceMap: true } }
+        ]
+      }
     ]
   },
 
   plugins: [
     // Only update what has changed on hot reload
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-})
+    new webpack.HotModuleReplacementPlugin()
+  ]
+});

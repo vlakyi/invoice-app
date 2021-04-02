@@ -1,0 +1,55 @@
+@mixin box($top, $height, $background) {
+  position: absolute;
+  top: $top;
+  left: 0;
+  width: 100%;
+  height: $height;
+  background-color: $background;
+}
+
+.logo {
+  &-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+
+    img {
+      position: absolute;
+      width: 1.75rem;
+    }
+  }
+
+  &-box:first-of-type {
+    @include box($top: 0, $height: 100%, $background: var(--clr-primary-600));
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+
+  &-box:nth-of-type(2) {
+    @include box($top: 50%, $height: 50%, $background: var(--clr-primary-500));
+    border-radius: 1.25rem 0 1.25rem 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    &-container {
+      width: 5rem;
+      height: 5rem;
+
+      img {
+        width: 1.9375rem;
+      }
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    &-container {
+      width: 6.5rem;
+      height: 6.5rem;
+
+      img {
+        width: 2.5rem;
+      }
+    }
+  }
+}

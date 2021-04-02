@@ -7,7 +7,7 @@ const paths = require('./paths');
 module.exports = {
   entry: [`${paths.src}/index.tsx`],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.scss']
   },
   output: {
     path: paths.build,
@@ -55,10 +55,15 @@ module.exports = {
       { test: /\.tsx?$/, use: ['ts-loader'] },
 
       // Images: Copy image files to build folder
-      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
+      { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, use: 'url-loader' },
 
       // Fonts and SVGs: Inline files
-      { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' }
+      { test: /\.(woff(2)?|eot|ttf|otf|)$/, type: 'asset/inline' },
+      // SVG
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader']
+      }
     ]
   }
 };
