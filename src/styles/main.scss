@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+body {
+  background-color: var(--background-light);
+}
+
 #page-fixed-container {
   height: 100%;
   display: flex;
@@ -24,6 +28,8 @@
   width: 100%;
 }
 
-body {
-  background-color: var(--background-light);
+.invoices-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
