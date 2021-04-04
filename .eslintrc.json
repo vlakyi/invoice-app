@@ -90,6 +90,7 @@
     "document": true
   },
   "env": {
-    "jest/globals": true
+    "jest/globals": true,
+    "browser": true
   }
 }
