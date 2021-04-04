@@ -8,8 +8,20 @@
   width: 100%;
 }
 
-#page-container {
+#page-fixed-container {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media screen and (min-width: 1440px) {
+    flex-direction: row;
+  }
+}
+
+#page-scrollable-container {
+  overflow-y: auto;
+  width: 100%;
 }
 
 body {

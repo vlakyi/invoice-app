@@ -1,0 +1,80 @@
+@mixin status-color($color) {
+  .invoice-status-circle {
+    background-color: $color;
+  }
+
+  .invoice-status {
+    color: $color;
+  }
+}
+
+.invoice-container-desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-500);
+  margin: 0 3rem 1rem;
+  padding: 1.5rem;
+  background-color: var(--clr-primary-100);
+  border-radius: 0.5rem;
+  width: 87.5%;
+  max-width: 45.5rem;
+
+  & .invoice-due-date {
+    margin-bottom: 0.5rem;
+    color: var(--text-clr-400);
+  }
+
+  & .invoice-total {
+    font-size: 1rem;
+  }
+
+  & .invoice-total,
+  & .invoice-id {
+    color: var(--text-clr-900);
+  }
+
+  & .invoice-id > span {
+    color: var(--text-clr-500);
+  }
+
+  & .invoice-status-container-wrapper {
+    display: flex;
+    align-items: center;
+    & .invoice-status-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 6.5rem;
+      padding: 12px 0;
+      border-radius: 6px;
+      margin-right: 20px;
+
+      &-paid {
+        background-color: var(--status-paid-background-clr);
+        @include status-color($color: var(--status-paid-clr));
+      }
+
+      &-pending {
+        background-color: var(--status-pending-background-clr);
+        @include status-color($color: var(--status-pending-clr));
+      }
+
+      &-draft {
+        background-color: var(--status-draft-background-clr);
+        @include status-color($color: var(--status-draft-clr));
+      }
+
+      & .invoice-status-circle {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+
+      & .invoice-status {
+        font-weight: 700;
+      }
+    }
+  }
+}

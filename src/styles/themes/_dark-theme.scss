@@ -12,4 +12,32 @@
       fill: var(--icon-color-dark);
     }
   }
+
+  & .invoice-container-mobile,
+  & .invoice-container-desktop {
+    background-color: var(--clr-primary-900);
+    color: var(--text-clr-100);
+
+    & .invoice-id,
+    & .invoice-wrapper,
+    & .invoice-total {
+      color: var(--text-clr-100);
+    }
+
+    & .invoice-due-date {
+      color: var(--text-clr-200);
+    }
+
+    & .invoice-status-container-draft {
+      background-color: var(--status-draft-background-clr-dark);
+
+      & .invoice-status-circle {
+        background-color: var(--status-draft-clr-dark);
+      }
+
+      & .invoice-status {
+        color: var(--status-draft-clr-dark);
+      }
+    }
+  }
 }
