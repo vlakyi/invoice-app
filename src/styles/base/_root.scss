@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap');
 :root {
   // Primary colors
   --clr-primary-900: hsl(233, 31%, 17%);
@@ -5,29 +6,42 @@
   --clr-primary-700: hsl(231, 20%, 27%);
   --clr-primary-600: hsl(252, 94%, 67%);
   --clr-primary-500: hsl(252, 100%, 73%);
+  --clr-primary-100: hsl(255, 100%, 100%);
 
-  // Elements colors
   --clr-pink-dark: hsl(0, 80%, 63%);
   --clr-pink-light: hsl(0, 100%, 80%);
-  --clr-green: hsl(160, 67%, 52%);
-  --clr-orange: hsl(34, 100%, 50%);
+
+  // Status elements colors
+  --status-paid-clr: hsl(160, 67%, 52%);
+  --status-pending-clr: hsl(34, 100%, 50%);
+  --status-draft-clr: hsl(231, 20%, 27%);
+
+  // Status Elements background colors
+  --status-paid-background-clr: hsla(160, 67%, 52%, 0.06);
+  --status-pending-background-clr: hsla(34, 100%, 50%, 0.06);
+  --status-draft-background-clr: hsl(231, 20%, 27%, 0.06);
+
+  // Status Element Draft - Dark Theme
+  --status-draft-clr-dark: hsl(231, 75%, 93%);
+  --status-draft-background-clr-dark: hsl(231, 75%, 93%, 0.06);
 
   --icon-color-dark: hsl(232, 23%, 61%);
 
   // Theme background colors
-  --background-light: hsl(240, 27%, 98);
+  --background-light: hsl(240, 27%, 98%);
   --background-dark: hsl(233, 30%, 11%);
 
   // Text colors
-  --text-clr-900: hsl(228, 29%, 7%);
+  --text-clr-900: hsl(228, 28%, 7%);
   --text-clr-600: hsl(231, 20%, 36%);
-  --text-clr-500: hsl(231, 37%, 63%);
+  --text-clr-500: hsl(231, 36%, 63%);
   --text-clr-400: hsl(231, 20%, 61%);
-  --text-clr-200: hsl(231, 73%, 93%);
-  --text-clr-100: hsl(0, 0%, 100);
+  --text-clr-200: hsl(231, 75%, 93%);
+  --text-clr-100: hsl(0, 0%, 100%);
 
   // Font
-  --font-family: 'Spartan', sans-serif;
+  font-family: 'Spartan', sans-serif;
+  letter-spacing: -0.25px;
 
   // Font size mobile first
   --fs-900: 1.5rem;

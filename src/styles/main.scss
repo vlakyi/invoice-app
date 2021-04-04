@@ -8,10 +8,28 @@
   width: 100%;
 }
 
-#page-container {
-  height: 100%;
-}
-
 body {
   background-color: var(--background-light);
+}
+
+#page-fixed-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media screen and (min-width: 1440px) {
+    flex-direction: row;
+  }
+}
+
+#page-scrollable-container {
+  overflow-y: auto;
+  width: 100%;
+}
+
+.invoices-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
