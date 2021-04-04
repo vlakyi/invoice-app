@@ -1,6 +1,5 @@
 import { InvoiceObject, InvoiceObjectFormated } from './types';
 
-/* eslint-disable import/prefer-default-export */
 export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated[] => {
   return invoices.map((invoice) => {
     const { paymentDue, total } = invoice;
