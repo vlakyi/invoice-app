@@ -1,34 +1,30 @@
-import { useEffect, useState } from 'react';
+import useViewport from '../hooks/useViewport';
+
 import InvoiceMobile from './InvoiceMobile';
 import InvoiceDesktop from './InvoiceDesktop';
-import useViewport from '../hooks/useViewport';
+import EmptyInvoiceList from './EmptyInvoiceList';
 
 // interfaces
 import { InvoiceObjectFormated } from '../utils/types';
-// utils
-import { formatInvoices } from '../utils/api';
 
-import dataJSON from '../../data.json';
+interface Props {
+  invoices: InvoiceObjectFormated[];
+}
 
-const InvoicesList = (): JSX.Element => {
-  const [invoices, setInvoices] = useState<InvoiceObjectFormated[] | []>([]);
+const InvoicesList = ({ invoices }: Props): JSX.Element => {
   const { width } = useViewport();
 
-  useEffect(() => {
-    const invoicesArr = formatInvoices(dataJSON);
-    setInvoices(invoicesArr);
-  }, []);
+  const InvoiceComponent = width < 768 ? InvoiceMobile : InvoiceDesktop;
 
   return (
-    <div className='invoices-list-container'>
-      {invoices.length > 0 &&
+    <div className='invoices-list-container' data-testid='invoices-list'>
+      {invoices.length > 0 ? (
         invoices.map((invoice: InvoiceObjectFormated) => {
-          return width < 768 ? (
-            <InvoiceMobile key={invoice.id} invoice={invoice} />
-          ) : (
-            <InvoiceDesktop key={invoice.id} invoice={invoice} />
-          );
-        })}
+          return <InvoiceComponent key={invoice.id} invoice={invoice} />;
+        })
+      ) : (
+        <EmptyInvoiceList />
+      )}
     </div>
   );
 };

@@ -10,6 +10,7 @@
     "lint:staged": "eslint --fix --max-warnings=0",
     "lint:all": "eslint ./src/**/*.{js,jsx,ts,tsx} --fix --max-warnings=0",
     "test": "jest --watchAll --no-cache",
+    "test:coverage": "jest --coverage --no-cache",
     "test:ci": "jest --forceExit --detectOpenHandles --maxWorkers=10"
   },
   "lint-staged": {

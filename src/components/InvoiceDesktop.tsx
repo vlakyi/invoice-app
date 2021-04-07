@@ -7,10 +7,8 @@ interface Props {
   invoice: InvoiceObjectFormated;
 }
 
-const InvoiceMobile = (props: Props): JSX.Element => {
-  const {
-    invoice: { id, paymentDue, total, status, clientName }
-  } = props;
+const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
+  const { id, paymentDue, total, status, clientName } = invoice;
 
   const classStatus = status.toLowerCase();
 

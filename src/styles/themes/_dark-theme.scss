@@ -1,6 +1,7 @@
 .theme-dark {
   background-color: var(--background-dark);
 
+  // Main header
   .main-page-header {
     background-color: var(--clr-primary-900);
 
@@ -13,6 +14,7 @@
     }
   }
 
+  // Element inside invoice list
   & .invoice-container-mobile,
   & .invoice-container-desktop {
     background-color: var(--clr-primary-900);
@@ -38,6 +40,52 @@
       & .invoice-status {
         color: var(--status-draft-clr-dark);
       }
+    }
+  }
+
+  // Invoices Filter
+  & .filter-option-container span {
+    color: var(--text-clr-100);
+  }
+
+  & .invoice-filter-container {
+    & .invoice-filter-header {
+      color: var(--text-clr-100);
+    }
+
+    & .invoice-filter-wrapper {
+      & > span {
+        color: var(--text-clr-200);
+      }
+
+      & .filter-container {
+        &-header {
+          color: var(--text-clr-100);
+        }
+      }
+
+      & .filter-overlay-wrapper {
+        background-color: var(--clr-primary-800);
+        box-shadow: 0px 0.625rem 1.25rem rgba(0, 0, 0, 0.25);
+
+        & .filter-option span {
+          color: var(--text-clr-100);
+        }
+      }
+    }
+  }
+
+  & .custom-checkbox-checkmark {
+    background-color: var(--clr-primary-900);
+  }
+
+  // Empty list illustration
+  & .invoices-list-empty-container {
+    & h2 {
+      color: var(--text-clr-100);
+    }
+    & p {
+      color: var(--text-clr-200);
     }
   }
 }

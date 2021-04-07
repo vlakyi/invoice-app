@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 
 import InvoiceMobile from '../components/InvoiceMobile';
+import InvoiceDesktop from '../components/InvoiceDesktop';
 import { InvoiceObjectFormated } from '../utils/types';
 
 const testInvoice: InvoiceObjectFormated = {
@@ -19,9 +20,22 @@ const testInvoice: InvoiceObjectFormated = {
   total: '£1,800.90'
 };
 
-it('renders Invoice component with all needed information', async () => {
+it('renders Invoice Mobile component with all needed information', async () => {
   // Check if id, paymentDue, total, clientName and status are visible
   const { getByText, queryByText } = render(<InvoiceMobile invoice={testInvoice} />);
+  expect(getByText(`${testInvoice.id}`)).toBeInTheDocument();
+  expect(getByText(`Due ${testInvoice.paymentDue}`)).toBeInTheDocument();
+  expect(getByText(`${testInvoice.total}`)).toBeInTheDocument();
+  expect(getByText(`${testInvoice.clientName}`)).toBeInTheDocument();
+  expect(getByText(`${testInvoice.status}`)).toBeInTheDocument();
+
+  // Check if additonal information is not visible
+  expect(queryByText(`${testInvoice.description}`)).toBeNull();
+});
+
+it('renders Invoice Desktop component with all needed information', async () => {
+  // Check if id, paymentDue, total, clientName and status are visible
+  const { getByText, queryByText } = render(<InvoiceDesktop invoice={testInvoice} />);
   expect(getByText(`${testInvoice.id}`)).toBeInTheDocument();
   expect(getByText(`Due ${testInvoice.paymentDue}`)).toBeInTheDocument();
   expect(getByText(`${testInvoice.total}`)).toBeInTheDocument();

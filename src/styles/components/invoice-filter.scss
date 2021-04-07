@@ -1,0 +1,103 @@
+.invoice-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 23.5rem;
+
+  & .invoice-filter-wrapper:first-of-type {
+    line-height: var(--lh-300);
+    & span {
+      font-size: var(--fs-500);
+      color: var(--text-clr-400);
+    }
+  }
+
+  & .invoice-filter-wrapper:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+
+    & .invoice-filter-new-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 1.125rem;
+      border: none;
+      outline: none;
+      border-radius: 1.5rem;
+      background-color: var(--clr-primary-600);
+
+      &:hover {
+        background-color: var(--clr-primary-500);
+        cursor: pointer;
+
+        & svg > path {
+          fill: var(--clr-primary-500);
+        }
+      }
+    }
+
+    & .invoice-filter-new-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin: 4px 0;
+
+      & .invoice-filter-new-circle {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: var(--clr-primary-100);
+      }
+
+      & svg {
+        position: absolute;
+      }
+    }
+
+    & .invoice-filter-new-text {
+      margin: 0 0.5rem;
+      font-size: var(--fs-500);
+      font-weight: 700;
+      color: var(--text-clr-100);
+    }
+  }
+
+  & .invoice-filter-header {
+    color: var(--text-clr-900);
+    font-size: var(--fs-800);
+    margin-bottom: 0.25rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 45.5rem;
+    margin: 3.5rem auto;
+
+    & .invoice-filter-header {
+      line-height: normal;
+      font-size: 2rem;
+    }
+
+    & .invoice-filter-wrapper:first-of-type {
+      line-height: 1.5rem;
+      & span {
+        font-size: var(--fs-500);
+      }
+    }
+
+    & .invoice-filter-wrapper:nth-of-type(2) {
+      & .invoice-filter-new-container {
+        margin-left: 2.5rem;
+      }
+
+      & .invoice-filter-new-wrapper {
+        margin: 6px 2px;
+      }
+
+      & .invoice-filter-new-text {
+        margin: 0 1rem;
+      }
+    }
+  }
+}

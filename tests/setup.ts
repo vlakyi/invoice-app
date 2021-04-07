@@ -6,6 +6,7 @@ beforeEach(async () => {
 
 afterEach(cleanup);
 
-it('test from setup', () => {
-  expect('123').toBe('123');
-});
+export function windowResize (width: number) {
+  global.innerWidth = width;
+  global.dispatchEvent(new Event('resize'));
+}
