@@ -1,3 +1,5 @@
+import { Dispatch } from 'react';
+
 export interface InvoiceItems {
   [index: number]: {
     name: string;
@@ -15,7 +17,6 @@ interface InvoiceObjectBase {
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: string;
   senderAddress: {
     street: string;
     city: string;
@@ -32,9 +33,31 @@ interface InvoiceObjectBase {
 }
 
 export interface InvoiceObject extends InvoiceObjectBase {
+  status: string;
   total: number;
 }
 
 export interface InvoiceObjectFormated extends InvoiceObjectBase {
+  status: keyof FilterStatus;
   total: string;
+}
+
+export interface FilterStatus {
+  Draft: boolean;
+  Pending: boolean;
+  Paid: boolean;
+}
+
+export type FilterContextType = {
+  invoices: InvoiceObjectFormated[] | [];
+  setInvoices: (state: InvoiceObjectFormated[] | []) => void;
+  filteredInvoices: InvoiceObjectFormated[] | [];
+  setFilteredInvoices: (state: InvoiceObjectFormated[] | []) => void;
+  filterState: FilterStatus;
+  updateFilter: Dispatch<ReducerAction>;
+};
+
+export interface ReducerAction {
+  type: string;
+  payload?: { [index: string]: boolean };
 }

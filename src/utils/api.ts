@@ -1,4 +1,4 @@
-import { InvoiceObject, InvoiceObjectFormated } from './types';
+import { FilterStatus, InvoiceObject, InvoiceObjectFormated } from './types';
 
 export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated[] => {
   return invoices.map((invoice) => {
@@ -23,6 +23,6 @@ export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated
     formatedStatus[0] = formatedStatus[0].toLocaleUpperCase();
     status = formatedStatus.join('');
 
-    return { ...invoice, paymentDue: dueDate, total: cost, status };
+    return { ...invoice, paymentDue: dueDate, total: cost, status: status as keyof FilterStatus };
   });
 };
