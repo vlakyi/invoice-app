@@ -13,7 +13,7 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
   const classStatus = status.toLowerCase();
 
   return (
-    <div className='invoice-container-desktop'>
+    <article className='invoice-container-desktop'>
       <h4 className='invoice-id'>
         <span>#</span>
         {id}
@@ -30,7 +30,7 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
         </div>
         <ArrowRight />
       </div>
-    </div>
+    </article>
   );
 };
 

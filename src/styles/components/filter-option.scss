@@ -1,6 +1,11 @@
 .filter-option-container {
   display: flex;
   align-items: center;
+  padding: unset;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
 
   & :first-child {
     margin-right: 0.8125rem;

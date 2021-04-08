@@ -17,7 +17,7 @@ const InvoicesList = ({ invoices }: Props): JSX.Element => {
   const InvoiceComponent = width < 768 ? InvoiceMobile : InvoiceDesktop;
 
   return (
-    <div className='invoices-list-container' data-testid='invoices-list'>
+    <section className='invoices-list-container' data-testid='invoices-list'>
       {invoices.length > 0 ? (
         invoices.map((invoice: InvoiceObjectFormated) => {
           return <InvoiceComponent key={invoice.id} invoice={invoice} />;
@@ -25,7 +25,7 @@ const InvoicesList = ({ invoices }: Props): JSX.Element => {
       ) : (
         <EmptyInvoiceList />
       )}
-    </div>
+    </section>
   );
 };
 

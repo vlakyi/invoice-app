@@ -11,7 +11,7 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
   const classStatus = status.toLowerCase();
 
   return (
-    <div className='invoice-container-mobile'>
+    <article className='invoice-container-mobile'>
       <div className='invoice-wrapper'>
         <h4 className='invoice-id'>
           <span>#</span>
@@ -30,7 +30,7 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
           <span className='invoice-status'>{status}</span>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
