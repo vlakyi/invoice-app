@@ -56,14 +56,6 @@
       2
     ],
     "no-console": "warn",
-    "react/prop-types": [
-      2,
-      {
-        "ignore": [
-          "history"
-        ]
-      }
-    ],
     "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-filename-extension": [
       1,
@@ -83,6 +75,8 @@
     "react/jsx-props-no-spreading": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
     "prefer-promise-reject-errors": "off",
     "camelcase": "off",
     "no-unused-vars": "off",
