@@ -12,7 +12,7 @@ const testInvoice: InvoiceObjectFormated = {
   createdAt: '2021-08-18',
   description: 'Re-branding',
   id: 'RT3080',
-  items: [{ name: 'Brand Guidelines', quantity: 1, price: 1800.9, total: 1800.9 }],
+  items: [{ name: 'Brand Guidelines', quantity: 1, price: '$1800.9', total: '$1800.9' }],
   paymentDue: '19 Aug 2021',
   paymentTerms: 1,
   senderAddress: { street: '19 Union Terrace', city: 'London', postCode: 'E1 3EZ', country: 'United Kingdom' },

@@ -34,11 +34,11 @@
       background-color: var(--status-draft-background-clr-dark);
 
       & .invoice-status-circle {
-        background-color: var(--status-draft-clr-dark);
+        background-color: var(--clr-primary-300);
       }
 
       & .invoice-status {
-        color: var(--status-draft-clr-dark);
+        color: var(--clr-primary-300);
       }
     }
   }

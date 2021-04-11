@@ -1,13 +1,21 @@
 import { Dispatch } from 'react';
 
-export interface InvoiceItems {
-  [index: number]: {
-    name: string;
-    quantity: number;
-    price: number;
-    total: number;
-  };
+export interface InvoiceItem {
+  name: string;
+  quantity: number;
+  price: number;
+  total: number;
 }
+
+export interface InvoiceItemFormated {
+  name: string;
+  quantity: number;
+  price: string;
+  total: string;
+}
+
+export type InvoiceItems = Array<InvoiceItem>;
+export type InvoiceItemsFormated = Array<InvoiceItemFormated>;
 
 interface InvoiceObjectBase {
   id: string;
@@ -29,17 +37,18 @@ interface InvoiceObjectBase {
     postCode: string;
     country: string;
   };
-  items: InvoiceItems;
 }
 
 export interface InvoiceObject extends InvoiceObjectBase {
   status: string;
   total: number;
+  items: InvoiceItems;
 }
 
 export interface InvoiceObjectFormated extends InvoiceObjectBase {
   status: keyof FilterStatus;
   total: string;
+  items: InvoiceItemsFormated;
 }
 
 export interface FilterStatus {

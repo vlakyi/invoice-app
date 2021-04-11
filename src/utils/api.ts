@@ -1,28 +1,51 @@
 import { FilterStatus, InvoiceObject, InvoiceObjectFormated } from './types';
 
+const formatCurrency = (numberToFormat: number, currency = 'GBP'): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency
+  })
+    .format(numberToFormat)
+    .replace(/^(\D+)/, '$1 ');
+};
+
 export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated[] => {
   return invoices.map((invoice) => {
-    const { paymentDue, total } = invoice;
+    const { paymentDue, createdAt, total, items } = invoice;
     let { status } = invoice;
 
-    const date = new Date(paymentDue);
-    const dueDate = date.toLocaleDateString('en-GB', {
+    const invoiceDate = new Date(createdAt).toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
     });
 
-    const cost = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'GBP'
-    })
-      .format(total)
-      .replace(/^(\D+)/, '$1 ');
+    const paymentDate = new Date(paymentDue).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    const cost = formatCurrency(total);
 
     const formatedStatus = status.split('');
     formatedStatus[0] = formatedStatus[0].toLocaleUpperCase();
     status = formatedStatus.join('');
 
-    return { ...invoice, paymentDue: dueDate, total: cost, status: status as keyof FilterStatus };
+    const formatedItems = items.map((item) => {
+      const itemPriceFormated = formatCurrency(item.price);
+      const itemTotalFormated = formatCurrency(item.total);
+
+      return { ...item, price: itemPriceFormated, total: itemTotalFormated };
+    });
+
+    return {
+      ...invoice,
+      paymentDue: paymentDate,
+      createdAt: invoiceDate,
+      total: cost,
+      status: status as keyof FilterStatus,
+      items: formatedItems
+    };
   });
 };

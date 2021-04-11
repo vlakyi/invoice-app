@@ -1,4 +1,7 @@
+import { useHistory } from 'react-router-dom';
 import { InvoiceObjectFormated } from '../utils/types';
+
+import StatusMarker from './StatusMarker';
 import '../styles/components/invoice-desktop.scss';
 
 import { ReactComponent as ArrowRight } from '../../public/icon-arrow-right.svg';
@@ -9,11 +12,10 @@ interface Props {
 
 const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
   const { id, paymentDue, total, status, clientName } = invoice;
-
-  const classStatus = status.toLowerCase();
+  const history = useHistory();
 
   return (
-    <article className='invoice-container-desktop'>
+    <button type='button' className='invoice-container-desktop' onClick={() => history.push(`/invoice/${id}`)}>
       <h4 className='invoice-id'>
         <span>#</span>
         {id}
@@ -23,14 +25,11 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
       <span className='invoice-due-date'>Due {paymentDue}</span>
       <h2 className='invoice-total'>{total}</h2>
 
-      <div className='invoice-status-container-wrapper'>
-        <div className={`invoice-status-container invoice-status-container-${classStatus}`}>
-          <div className='invoice-status-circle' />
-          <span className='invoice-status'>{status}</span>
-        </div>
+      <div className='invoice-status-marker-container'>
+        <StatusMarker status={status} />
         <ArrowRight />
       </div>
-    </article>
+    </button>
   );
 };
 
