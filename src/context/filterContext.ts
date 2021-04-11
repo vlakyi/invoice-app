@@ -13,5 +13,4 @@ const FilterContext = createContext<FilterContextType>({
   },
   updateFilter: () => {}
 });
-
 export default FilterContext;
