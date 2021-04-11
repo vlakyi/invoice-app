@@ -42,19 +42,22 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
               <h4>Go back</h4>
             </Link>
 
-            <section className='view-invoice-status-container details-container'>
+            <section
+              className='view-invoice-status-container details-container'
+              data-testid='view-invoice-status-container'
+            >
               <div className='view-invoice-status-wrapper'>
                 <span className='view-invoice-status-label'>Status</span>
                 <StatusMarker status={currentInvoice.status} />
               </div>
               {width >= 768 ? (
-                <div>
+                <div data-testid='view-invoice-status-actions-container'>
                   <ViewInvoiceActions />
                 </div>
               ) : null}
             </section>
 
-            <section className='view-invoice-section details-container'>
+            <section className='view-invoice-section details-container' data-testid='view-invoice-details-container'>
               <h4 className='view-invoice-id'>
                 <span>#</span>
                 {currentInvoice.id}
@@ -130,7 +133,7 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
           </article>
 
           {width < 768 ? (
-            <footer className='view-invoice-footer'>
+            <footer className='view-invoice-footer' data-testid='view-invoice-footer'>
               <ViewInvoiceActions />
             </footer>
           ) : null}

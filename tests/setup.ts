@@ -6,7 +6,7 @@ beforeEach(async () => {
 
 afterEach(cleanup);
 
-export function windowResize (width: number) {
+export function windowResize(width: number): void {
   global.innerWidth = width;
   global.dispatchEvent(new Event('resize'));
 }
