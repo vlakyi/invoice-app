@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import filterContext from '../context/filterContext';
+import filterContext from '../context/FilterContext';
 
 import Filter from './Filter';
 import '../styles/components/invoice-filter.scss';
