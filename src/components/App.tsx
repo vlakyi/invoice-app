@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer, Suspense, lazy } from 'react';
+import { useEffect, useState, useReducer, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components
@@ -17,7 +17,7 @@ import dataJSON from '../../data.json';
 import FilterContext from '../context/FilterContext';
 
 // Screens
-const ViewInvoice = lazy(() => import('../screens/ViewInvoice'));
+import ViewInvoice from '../screens/ViewInvoice';
 
 const initialFilterState: FilterStatus = {
   Draft: true,
