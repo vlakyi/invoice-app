@@ -28,6 +28,10 @@ module.exports = {
             ignore: ['*.DS_Store']
           },
           noErrorOnMissing: true
+        },
+        {
+          from: `${paths.root}/netlify.toml`,
+          to: paths.build
         }
       ]
     }),
