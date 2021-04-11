@@ -1,6 +1,6 @@
 import { FilterStatus, InvoiceObject, InvoiceObjectFormated } from './types';
 
-const formatCurrency = (numberToFormat: number, currency = 'GBP'): string => {
+export const formatCurrency = (numberToFormat: number, currency = 'GBP'): string => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency
