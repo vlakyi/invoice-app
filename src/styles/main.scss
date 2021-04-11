@@ -12,12 +12,6 @@ body {
   background-color: var(--background-light);
 }
 
-button[type='button'] {
-  outline: none;
-  border: none;
-  background: unset;
-}
-
 #page-fixed-container {
   height: 100%;
   display: flex;
@@ -35,7 +29,6 @@ button[type='button'] {
   width: 100%;
   height: 100%;
   padding: 0 1.5rem;
-  padding-bottom: 4rem;
 }
 
 .invoices-list-container {
@@ -43,6 +36,7 @@ button[type='button'] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5rem;
 }
 
 @media screen and (min-width: 756px) {

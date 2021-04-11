@@ -10,7 +10,7 @@ const Header = (): JSX.Element => {
   const [isDark, toggleTheme] = useTheme();
 
   return (
-    <nav className='main-page-header'>
+    <header className='main-page-header'>
       <Logo />
       <section>
         {isDark ? (
@@ -21,7 +21,7 @@ const Header = (): JSX.Element => {
         <div className='horizontal-line' />
         <img src={avatarUrl} alt='avatar icon' />
       </section>
-    </nav>
+    </header>
   );
 };
 

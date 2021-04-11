@@ -1,4 +1,5 @@
-import { useEffect, useState, useReducer } from 'react';
+import { useEffect, useState, useReducer, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components
 import Header from './Header';
@@ -13,7 +14,10 @@ import { formatInvoices } from '../utils/api';
 import dataJSON from '../../data.json';
 
 // context
-import FilterContext from '../context/filterContext';
+import FilterContext from '../context/FilterContext';
+
+// Screens
+const ViewInvoice = lazy(() => import('../screens/ViewInvoice'));
 
 const initialFilterState: FilterStatus = {
   Draft: true,
@@ -44,17 +48,38 @@ const App = (): JSX.Element => {
   }, []);
 
   return (
-    <div id='page-fixed-container'>
-      <Header />
-      <div id='page-scrollable-container'>
-        <FilterContext.Provider
-          value={{ invoices, setInvoices, filteredInvoices, setFilteredInvoices, filterState, updateFilter }}
-        >
-          <InvoiceFilter />
-        </FilterContext.Provider>
-        <InvoiceList invoices={filteredInvoices} />
+    <Router>
+      <div id='page-fixed-container'>
+        <Header />
+        <Suspense fallback={<div>Loading..</div>}>
+          <Switch>
+            <Route path='/invoice/:id' render={(props) => <ViewInvoice routeProps={props} invoices={invoices} />} />
+
+            <Route
+              path='/'
+              render={() => (
+                <div id='page-scrollable-container'>
+                  <FilterContext.Provider
+                    value={{
+                      invoices,
+                      setInvoices,
+                      filteredInvoices,
+                      setFilteredInvoices,
+                      filterState,
+                      updateFilter
+                    }}
+                  >
+                    <InvoiceFilter />
+                  </FilterContext.Provider>
+
+                  <InvoiceList invoices={filteredInvoices} />
+                </div>
+              )}
+            />
+          </Switch>
+        </Suspense>
       </div>
-    </div>
+    </Router>
   );
 };
 

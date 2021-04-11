@@ -4,7 +4,7 @@ import FilterOption from './FilterOption';
 
 import { FilterList } from '../utils/constants';
 
-import FilterContext from '../context/filterContext';
+import FilterContext from '../context/FilterContext';
 
 // icons
 import { ReactComponent as ArrowDown } from '../../public/icon-arrow-down.svg';

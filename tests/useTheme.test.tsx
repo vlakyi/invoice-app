@@ -11,7 +11,9 @@ const ThemedComponent = ({ isDarkDefault = false }: Props) => {
   return (
     <div>
       <span>{isDark}</span>
-      <button onClick={toggleDark}>Toggle</button>
+      <button type='button' onClick={toggleDark}>
+        Toggle
+      </button>
     </div>
   );
 };

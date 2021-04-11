@@ -37,6 +37,13 @@ body {
   line-height: 1.5;
 }
 
+/* Remove default link style*/
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
@@ -48,17 +55,20 @@ img {
   display: block;
 }
 
-/* Natural flow and rhythm in articles by default */
-article > * + * {
-  margin-top: 1em;
-}
-
 /* Inherit fonts for inputs and buttons */
 input,
 button,
 textarea,
 select {
   font: inherit;
+}
+
+/* Reset button default outline, border and background */
+
+button {
+  outline: none;
+  border: none;
+  background-color: unset;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
