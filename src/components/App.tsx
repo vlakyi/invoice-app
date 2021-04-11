@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer, Suspense } from 'react';
+import { useEffect, useState, useReducer, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components
@@ -17,8 +17,7 @@ import dataJSON from '../../data.json';
 import FilterContext from '../context/FilterContext';
 
 // Screens
-import ViewInvoice from '../screens/ViewInvoice';
-// const ViewInvoice = lazy(() => import('../screens/ViewInvoice'));
+const ViewInvoice = lazy(() => import('../screens/ViewInvoice'));
 
 const initialFilterState: FilterStatus = {
   Draft: true,
@@ -49,10 +48,10 @@ const App = (): JSX.Element => {
   }, []);
 
   return (
-    <Router>
-      <div id='page-fixed-container'>
-        <Header />
-        <Suspense fallback={<div>Loading..</div>}>
+    <Suspense fallback={<div>Loading..</div>}>
+      <Router>
+        <div id='page-fixed-container'>
+          <Header />
           <Switch>
             <Route path='/invoice/:id' render={(props) => <ViewInvoice routeProps={props} invoices={invoices} />} />
 
@@ -78,9 +77,9 @@ const App = (): JSX.Element => {
               )}
             />
           </Switch>
-        </Suspense>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </Suspense>
   );
 };
 
