@@ -1,5 +1,4 @@
-import { render } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { render, act } from '@testing-library/react';
 
 import useViewport from '../src/hooks/useViewport';
 import { windowResize } from './setup';
