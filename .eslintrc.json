@@ -37,7 +37,8 @@
     "jsx-a11y",
     "react",
     "prettier",
-    "jest"
+    "jest",
+    "unused-imports"
   ],
   "rules": {
     "semi": 1,
@@ -80,7 +81,10 @@
     "prefer-promise-reject-errors": "off",
     "camelcase": "off",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "no-param-reassign": 0,
+    "no-plusplus": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "warn"
   },
   "globals": {
     "JSX": true,
