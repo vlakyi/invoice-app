@@ -1,5 +1,3 @@
-import { Dispatch } from 'react';
-
 export interface InvoiceItem {
   name: string;
   quantity: number;
@@ -7,7 +5,7 @@ export interface InvoiceItem {
   total: number;
 }
 
-export interface InvoiceItemFormated {
+export interface InvoiceItemFormatted {
   name: string;
   quantity: number;
   price: string;
@@ -15,7 +13,7 @@ export interface InvoiceItemFormated {
 }
 
 export type InvoiceItems = Array<InvoiceItem>;
-export type InvoiceItemsFormated = Array<InvoiceItemFormated>;
+export type InvoiceItemsFormatted = Array<InvoiceItemFormatted>;
 
 interface InvoiceObjectBase {
   id: string;
@@ -45,10 +43,10 @@ export interface InvoiceObject extends InvoiceObjectBase {
   items: InvoiceItems;
 }
 
-export interface InvoiceObjectFormated extends InvoiceObjectBase {
+export interface InvoiceObjectFormatted extends InvoiceObjectBase {
   status: keyof FilterStatus;
   total: string;
-  items: InvoiceItemsFormated;
+  items: InvoiceItemsFormatted;
 }
 
 export interface FilterStatus {
@@ -56,15 +54,6 @@ export interface FilterStatus {
   Pending: boolean;
   Paid: boolean;
 }
-
-export type FilterContextType = {
-  invoices: InvoiceObjectFormated[] | [];
-  setInvoices: (state: InvoiceObjectFormated[] | []) => void;
-  filteredInvoices: InvoiceObjectFormated[] | [];
-  setFilteredInvoices: (state: InvoiceObjectFormated[] | []) => void;
-  filterState: FilterStatus;
-  updateFilter: Dispatch<ReducerAction>;
-};
 
 export interface ReducerAction {
   type: string;

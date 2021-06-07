@@ -9,10 +9,10 @@ import { windowResize } from '../../tests/setup';
 
 const formattedInvoices = formatInvoices(dataJSON);
 
-it('renders View Invoice component for desktop veiw', () => {
+it('renders View Invoice component for desktop view', () => {
   const { getByText, getByTestId, queryByTestId } = render(
     <MemoryRouter initialEntries={['/invoice/XM9141']}>
-      <Route path='/invoice/:id' render={(props) => <ViewInvoice invoices={formattedInvoices} routeProps={props} />} />
+      <Route path='/invoice/:id' render={(props) => <ViewInvoice routeProps={props} />} />
     </MemoryRouter>
   );
 
@@ -22,16 +22,16 @@ it('renders View Invoice component for desktop veiw', () => {
   expect(getByTestId('view-invoice-status-container')).toBeInTheDocument();
   expect(getByTestId('view-invoice-details-container')).toBeInTheDocument();
 
-  // In thedesktop view actions buttons should be inside status container instead of footer;
+  // In the desktop view actions buttons should be inside status container instead of footer;
   expect(getByTestId('view-invoice-status-actions-container')).toBeInTheDocument();
   expect(queryByTestId('view-invoice-footer')).toBeNull();
 });
 
-it('renders View Invoice component for mobile veiw', () => {
+it('renders View Invoice component for mobile view', () => {
   act(() => windowResize(360));
   const { getByText, queryByText, getByTestId, queryByTestId } = render(
     <MemoryRouter initialEntries={['/invoice/XM9141']}>
-      <Route path='/invoice/:id' render={(props) => <ViewInvoice invoices={formattedInvoices} routeProps={props} />} />
+      <Route path='/invoice/:id' render={(props) => <ViewInvoice routeProps={props} />} />
     </MemoryRouter>
   );
 

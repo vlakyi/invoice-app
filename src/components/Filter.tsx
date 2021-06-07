@@ -1,10 +1,8 @@
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useViewport from '../hooks/useViewport';
 import FilterOption from './FilterOption';
 
 import { FilterList } from '../utils/constants';
-
-import FilterContext from '../context/FilterContext';
 
 // icons
 import { ReactComponent as ArrowDown } from '../../public/icon-arrow-down.svg';
@@ -17,17 +15,9 @@ const Filter = (): JSX.Element => {
 
   const [isOpen, toggleFilter] = useState(false);
 
-  const { invoices, setFilteredInvoices, filterState, updateFilter } = useContext(FilterContext);
-
   const filterArr = Object.values(FilterList);
 
   const filterOverlayRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const filteredInvoices = invoices.filter((invoice) => filterState[invoice.status]);
-
-    setFilteredInvoices(filteredInvoices);
-  }, [invoices, filterState]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -43,10 +33,9 @@ const Filter = (): JSX.Element => {
     };
   }, [filterOverlayRef]);
 
-  const swithFilter = () => toggleFilter(!isOpen);
   return (
     <div className='filter-container' ref={filterOverlayRef}>
-      <button type='button' className='filter-container-header' onClick={swithFilter}>
+      <button type='button' className='filter-container-header' onClick={() => toggleFilter(!isOpen)}>
         <h4>{`Filter ${!isMobile ? 'by status' : ''}`}</h4>
         <ArrowDown className={`${isOpen ? 'filter-opened' : ''}`} />
       </button>
@@ -55,7 +44,7 @@ const Filter = (): JSX.Element => {
         <div className='filter-overlay-wrapper' data-testid='filter-overlay'>
           {filterArr.length > 0 &&
             filterArr.map((label) => {
-              return <FilterOption key={label} label={label} state={filterState} dispatch={updateFilter} />;
+              return <FilterOption key={label} label={label} />;
             })}
         </div>
       ) : null}

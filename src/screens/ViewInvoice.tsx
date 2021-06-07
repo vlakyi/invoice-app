@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { InvoiceItemFormated, InvoiceObjectFormated } from '../utils/types';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { InvoicesState, changeInvoiceStatus } from '../store/slices/invoiceSlice';
+
+// Utils
+import { InvoiceItemFormatted, InvoiceObjectFormatted } from '../utils/types';
+import { FilterList } from '../utils/constants';
+
+// Components
 import StatusMarker from '../components/StatusMarker';
 import ViewInvoiceActions from '../components/ViewInvoiceActions';
 
@@ -16,13 +24,14 @@ interface MatchParams {
 }
 
 interface Props {
-  invoices: InvoiceObjectFormated[] | [];
   routeProps: RouteComponentProps<MatchParams>;
 }
 
-const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
-  const [currentInvoice, setCurrentInvoice] = useState<InvoiceObjectFormated | null>(null);
+const ViewInvoice = ({ routeProps }: Props): JSX.Element => {
+  const [currentInvoice, setCurrentInvoice] = useState<InvoiceObjectFormatted | null>(null);
   const { width } = useViewport();
+  const dispatch = useDispatch();
+  const invoices = useSelector((state: InvoicesState) => state.invoices);
 
   useEffect(() => {
     if (invoices.length > 0) {
@@ -31,6 +40,12 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
       setCurrentInvoice(invoice);
     }
   }, [invoices, routeProps]);
+
+  const markAsPaid = () => {
+    if (currentInvoice) {
+      dispatch(changeInvoiceStatus({ invoice: currentInvoice, status: FilterList.Paid }));
+    }
+  };
 
   return (
     <>
@@ -52,7 +67,7 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
               </div>
               {width >= 768 ? (
                 <div data-testid='view-invoice-status-actions-container'>
-                  <ViewInvoiceActions />
+                  <ViewInvoiceActions markAsPaid={markAsPaid} />
                 </div>
               ) : null}
             </section>
@@ -108,7 +123,7 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
                   </header>
                 ) : null}
 
-                {currentInvoice.items.map(({ name, price, quantity, total }: InvoiceItemFormated) => (
+                {currentInvoice.items.map(({ name, price, quantity, total }: InvoiceItemFormatted) => (
                   <div className='view-invoice-item' key={name + price}>
                     {width >= 768 ? (
                       <>
@@ -134,7 +149,7 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
 
           {width < 768 ? (
             <footer className='view-invoice-footer' data-testid='view-invoice-footer'>
-              <ViewInvoiceActions />
+              <ViewInvoiceActions markAsPaid={markAsPaid} />
             </footer>
           ) : null}
         </section>

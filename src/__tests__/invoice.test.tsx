@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 
 import InvoiceMobile from '../components/InvoiceMobile';
 import InvoiceDesktop from '../components/InvoiceDesktop';
-import { InvoiceObjectFormated } from '../utils/types';
+import { InvoiceObjectFormatted } from '../utils/types';
 
-const testInvoice: InvoiceObjectFormated = {
+const testInvoice: InvoiceObjectFormatted = {
   clientAddress: { street: '106 Kendell Street', city: 'Sharrington', postCode: 'NR24 5WQ', country: 'United Kingdom' },
   clientEmail: 'jensenh@mail.com',
   clientName: 'Jensen Huang',
@@ -29,7 +29,7 @@ it('renders Invoice Mobile component with all needed information', async () => {
   expect(getByText(`${testInvoice.clientName}`)).toBeInTheDocument();
   expect(getByText(`${testInvoice.status}`)).toBeInTheDocument();
 
-  // Check if additonal information is not visible
+  // Check if additional information is not visible
   expect(queryByText(`${testInvoice.description}`)).toBeNull();
 });
 
@@ -42,6 +42,6 @@ it('renders Invoice Desktop component with all needed information', async () => 
   expect(getByText(`${testInvoice.clientName}`)).toBeInTheDocument();
   expect(getByText(`${testInvoice.status}`)).toBeInTheDocument();
 
-  // Check if additonal information is not visible
+  // Check if additional information is not visible
   expect(queryByText(`${testInvoice.description}`)).toBeNull();
 });

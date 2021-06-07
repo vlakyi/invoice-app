@@ -10,11 +10,12 @@ enum ClassModifiers {
 interface Props {
   text: string;
   classModifier?: keyof typeof ClassModifiers;
+  onClick?: () => void;
 }
 
-const ActionButton = ({ text, classModifier = 'neutral' }: Props): JSX.Element => {
+const ActionButton = ({ text, classModifier = 'neutral', onClick }: Props): JSX.Element => {
   return (
-    <button className={`action-button action-button--${classModifier}`} type='button'>
+    <button className={`action-button action-button--${classModifier}`} type='button' onClick={onClick}>
       {text}
     </button>
   );

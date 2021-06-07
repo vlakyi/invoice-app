@@ -1,4 +1,4 @@
-import { FilterStatus, InvoiceObject, InvoiceObjectFormated } from './types';
+import { FilterStatus, InvoiceObject, InvoiceObjectFormatted } from './types';
 
 export const formatCurrency = (numberToFormat: number, currency = 'GBP'): string => {
   return new Intl.NumberFormat('en-US', {
@@ -9,7 +9,7 @@ export const formatCurrency = (numberToFormat: number, currency = 'GBP'): string
     .replace(/^(\D+)/, '$1 ');
 };
 
-export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated[] => {
+export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormatted[] => {
   return invoices.map((invoice) => {
     const { paymentDue, createdAt, total, items } = invoice;
     let { status } = invoice;
@@ -28,15 +28,15 @@ export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated
 
     const cost = formatCurrency(total);
 
-    const formatedStatus = status.split('');
-    formatedStatus[0] = formatedStatus[0].toLocaleUpperCase();
-    status = formatedStatus.join('');
+    const formattedStatus = status.split('');
+    formattedStatus[0] = formattedStatus[0].toLocaleUpperCase();
+    status = formattedStatus.join('');
 
-    const formatedItems = items.map((item) => {
-      const itemPriceFormated = formatCurrency(item.price);
-      const itemTotalFormated = formatCurrency(item.total);
+    const formattedItems = items.map((item) => {
+      const itemPriceFormatted = formatCurrency(item.price);
+      const itemTotalFormatted = formatCurrency(item.total);
 
-      return { ...item, price: itemPriceFormated, total: itemTotalFormated };
+      return { ...item, price: itemPriceFormatted, total: itemTotalFormatted };
     });
 
     return {
@@ -45,7 +45,7 @@ export const formatInvoices = (invoices: InvoiceObject[]): InvoiceObjectFormated
       createdAt: invoiceDate,
       total: cost,
       status: status as keyof FilterStatus,
-      items: formatedItems
+      items: formattedItems
     };
   });
 };

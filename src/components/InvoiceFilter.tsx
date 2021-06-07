@@ -1,5 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import filterContext from '../context/FilterContext';
+import { useEffect, useState } from 'react';
+
+// Redux
+import { useSelector } from 'react-redux';
+import { InvoicesState } from '../store/slices/invoiceSlice';
 
 import Filter from './Filter';
 import '../styles/components/invoice-filter.scss';
@@ -8,7 +11,8 @@ import { ReactComponent as IconPlus } from '../../public/icon-plus-circular.svg'
 import useViewport from '../hooks/useViewport';
 
 const InvoiceFilter = (): JSX.Element => {
-  const { filteredInvoices, filterState } = useContext(filterContext);
+  const filteredInvoices = useSelector((state: InvoicesState) => state.filteredInvoices);
+  const filters = useSelector((state: InvoicesState) => state.filters);
   const count = filteredInvoices.length;
 
   const [countMessage, setCountMessage] = useState('');
@@ -20,13 +24,13 @@ const InvoiceFilter = (): JSX.Element => {
     function populateFilterMessage(): string {
       const activeFilters: string[] = [];
 
-      Object.entries(filterState).forEach(([key, value]) => {
+      Object.entries(filters).forEach(([key, value]) => {
         if (value) {
           activeFilters.push(key.toLowerCase());
         }
       });
 
-      return activeFilters.length !== Object.keys(filterState).length ? activeFilters.join(' or ') : 'total';
+      return activeFilters.length !== Object.keys(filters).length ? activeFilters.join(' or ') : 'total';
     }
 
     if (count > 0) {
