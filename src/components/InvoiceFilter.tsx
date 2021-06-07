@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-// Redux
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { InvoicesState } from '../store/slices/invoiceSlice';
 
@@ -53,13 +52,13 @@ const InvoiceFilter = (): JSX.Element => {
 
       <div className='invoice-filter-wrapper'>
         <Filter />
-        <button type='button' className='invoice-filter-new-container'>
+        <Link to='/invoice/new' className='invoice-filter-new-container'>
           <div className='invoice-filter-new-wrapper'>
             <div className='invoice-filter-new-circle' />
             <IconPlus />
           </div>
           <span className='invoice-filter-new-text'>{newButtonText}</span>
-        </button>
+        </Link>
       </div>
     </div>
   );
