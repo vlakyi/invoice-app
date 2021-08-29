@@ -71,7 +71,12 @@
     ],
     "react/no-set-state": "off",
     "prettier/prettier": [
-      "error"
+      "error",
+      {
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "endOfLine": "auto"
+      }
     ],
     "react/jsx-props-no-spreading": "off",
     "react/jsx-uses-react": "off",
