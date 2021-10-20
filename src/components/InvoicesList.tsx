@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { InvoicesState } from '../store/slices/invoiceSlice';
 
+import { RootState } from 'src/store';
 import useViewport from '../hooks/useViewport';
 
 import InvoiceMobile from './InvoiceMobile';
@@ -13,7 +13,9 @@ import { InvoiceObjectFormatted } from '../utils/types';
 const InvoicesList = (): JSX.Element => {
   const { width } = useViewport();
   const InvoiceComponent = width < 768 ? InvoiceMobile : InvoiceDesktop;
-  const invoices = useSelector((state: InvoicesState) => state.filteredInvoices);
+  const invoices = useSelector(
+    (state: RootState) => state.InvoiceSlice.filteredInvoices
+  );
 
   return (
     <section className='invoices-list-container' data-testid='invoices-list'>

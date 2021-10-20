@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import { filterInvoices, InvoicesState } from '../store/slices/invoiceSlice';
+import { RootState } from 'src/store';
+import { filterInvoices } from '../store/slices/invoiceSlice';
 
 import CustomCheckbox from './CustomCheckbox';
 
@@ -16,7 +17,7 @@ interface Props {
 
 const FilterOption = ({ label }: Props): JSX.Element => {
   const [isChecked, setIsChecked] = useState(true);
-  const filters = useSelector((state: InvoicesState) => state.filters);
+  const filters = useSelector((state: RootState) => state.InvoiceSlice.filters);
   const dispatch = useDispatch();
 
   const handleCheck = () => {
@@ -28,7 +29,12 @@ const FilterOption = ({ label }: Props): JSX.Element => {
   }, [filters]);
 
   return (
-    <button type='button' key={label} className='filter-option-container' onClick={handleCheck}>
+    <button
+      type='button'
+      key={label}
+      className='filter-option-container'
+      onClick={handleCheck}
+    >
       <CustomCheckbox isChecked={isChecked} handleCheck={handleCheck} />
       <span>{label}</span>
     </button>

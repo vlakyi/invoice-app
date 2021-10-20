@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '../../tests/setup';
 import App from '../components/App';
 
 it('checks if user can switch theme', async () => {
