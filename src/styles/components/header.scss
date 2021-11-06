@@ -36,6 +36,7 @@
     height: 100%;
     flex-direction: column;
     border-radius: 0 1.25rem 1.25rem 0;
+    z-index: 15;
 
     & section {
       flex-direction: column;
