@@ -59,3 +59,27 @@ export interface ReducerAction {
   type: string;
   payload?: { [index: string]: boolean };
 }
+
+export interface SelectOptions {
+  name: string;
+  value: string;
+}
+
+type InvoiceFormListItemId = string;
+
+export interface InvoiceFormListItem {
+  id: InvoiceFormListItemId;
+  name: string;
+  qty: number;
+  price: number;
+  total: number;
+}
+
+export type InvoiceFormListItemDispatchAction =
+  | { type: 'add' }
+  | {
+      type: 'update';
+      payload: InvoiceFormListItem;
+    }
+  | { type: 'delete'; payload: InvoiceFormListItemId }
+  | { type: 'reset' };
