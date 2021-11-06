@@ -21,7 +21,10 @@ const Filter = (): JSX.Element => {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (filterOverlayRef.current && !filterOverlayRef.current.contains(event.target as Node)) {
+      if (
+        filterOverlayRef.current &&
+        !filterOverlayRef.current.contains(event.target as Node)
+      ) {
         toggleFilter(false);
       }
     }
@@ -35,7 +38,11 @@ const Filter = (): JSX.Element => {
 
   return (
     <div className='filter-container' ref={filterOverlayRef}>
-      <button type='button' className='filter-container-header' onClick={() => toggleFilter(!isOpen)}>
+      <button
+        type='button'
+        className='filter-container-header'
+        onClick={() => toggleFilter(!isOpen)}
+      >
         <h4>{`Filter ${!isMobile ? 'by status' : ''}`}</h4>
         <ArrowDown className={`${isOpen ? 'filter-opened' : ''}`} />
       </button>

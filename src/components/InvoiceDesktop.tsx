@@ -15,7 +15,11 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
   const history = useHistory();
 
   return (
-    <button type='button' className='invoice-container-desktop' onClick={() => history.push(`/invoice/${id}`)}>
+    <button
+      type='button'
+      className='invoice-container-desktop'
+      onClick={() => history.push(`/invoice/${id}`)}
+    >
       <h4 className='invoice-id'>
         <span>#</span>
         {id}

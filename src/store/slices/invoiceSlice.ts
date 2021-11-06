@@ -11,23 +11,38 @@ export interface InvoicesState {
   filters: FilterStatus;
 }
 
-export const fetchInvoices = createAsyncThunk('invoices/fetchInvoices', async () => {
-  return formatInvoices(dataJSON);
-});
+export const fetchInvoices = createAsyncThunk(
+  'invoices/fetchInvoices',
+  async () => {
+    return formatInvoices(dataJSON);
+  }
+);
 
 export const initialFilters = {
   Draft: true,
   Paid: true,
-  Pending: true
+  Pending: true,
 };
 
-const initialState = { invoices: [], filteredInvoices: [], filters: initialFilters } as InvoicesState;
+export const initialState = {
+  invoices: [],
+  filteredInvoices: [],
+  filters: initialFilters,
+} as InvoicesState;
 
 const InvoiceSlice = createSlice({
   name: 'invoices',
   initialState,
   reducers: {
-    changeInvoiceStatus(state, action: { payload: { invoice: InvoiceObjectFormatted; status: keyof FilterStatus } }) {
+    changeInvoiceStatus(
+      state,
+      action: {
+        payload: {
+          invoice: InvoiceObjectFormatted;
+          status: keyof FilterStatus;
+        };
+      }
+    ) {
       state.invoices = state.invoices.map((invoice) => {
         if (invoice.id === action.payload.invoice.id) {
           invoice.status = action.payload.status;
@@ -44,15 +59,17 @@ const InvoiceSlice = createSlice({
     },
     filterInvoices(state, action) {
       state.filters = action.payload;
-      state.filteredInvoices = state.invoices.filter((invoice) => action.payload[invoice.status]);
-    }
+      state.filteredInvoices = state.invoices.filter(
+        (invoice) => action.payload[invoice.status]
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchInvoices.fulfilled, (state, action) => {
       state.invoices = action.payload;
       state.filteredInvoices = action.payload;
     });
-  }
+  },
 });
 
 export const { changeInvoiceStatus, filterInvoices } = InvoiceSlice.actions;

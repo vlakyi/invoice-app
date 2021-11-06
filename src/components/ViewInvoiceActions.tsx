@@ -13,7 +13,11 @@ const ViewInvoiceActions = ({ markAsPaid }: Props): JSX.Element => {
     <div className='view-invoice-actions-container'>
       <ActionButton text='Edit' />
       <ActionButton text='Delete' classModifier='danger' />
-      <ActionButton text={`${width >= 370 ? 'Mark as ' : ''}Paid`} classModifier='action' onClick={markAsPaid} />
+      <ActionButton
+        text={`${width >= 370 ? 'Mark as ' : ''}Paid`}
+        classModifier='action'
+        onClick={markAsPaid}
+      />
     </div>
   );
 };

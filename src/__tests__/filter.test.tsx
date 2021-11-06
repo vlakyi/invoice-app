@@ -18,7 +18,9 @@ it('renders App with Filter Component', () => {
   // Test invoices filtering
   const invoicesCount = getByTestId('invoices-list').children.length;
   fireEvent.click(filterOverlay.children[0]);
-  expect(getByTestId('invoices-list').children.length).toBeLessThan(invoicesCount);
+  expect(getByTestId('invoices-list').children.length).toBeLessThan(
+    invoicesCount
+  );
 
   // Close invoices on mouse down outside
   fireEvent.mouseDown(document);
