@@ -8,7 +8,8 @@ const EmptyInvoiceList = (): JSX.Element => {
       <EmptyIllustration />
       <h2>There is nothing here</h2>
       <p>
-        Create an invoice by clicking the <strong>New</strong> button and get started
+        Create an invoice by clicking the <strong>New</strong> button and get
+        started
       </p>
     </section>
   );

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap');
 :root {
   // Primary colors
+  --clr-primary-1000: hsl(228, 28%, 7%);
   --clr-primary-900: hsl(233, 31%, 17%);
   --clr-primary-800: hsl(233, 30%, 21%);
   --clr-primary-700: hsl(231, 20%, 27%);
@@ -29,6 +30,7 @@
   --icon-color-dark: hsl(232, 23%, 61%);
 
   // Theme background colors
+  --background-white: hsl(0, 0%, 100%);
   --background-light: hsl(240, 27%, 98%);
   --background-dark: hsl(233, 30%, 11%);
 

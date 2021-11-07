@@ -1,13 +1,20 @@
 .theme-dark {
-  background-color: var(--background-dark);
+  --background-light: var(--background-dark);
+  --background-white: var(--background-dark);
+
+  --clr-primary-100: var(--clr-primary-900);
+  --clr-primary-200: var(--clr-primary-800);
+  --clr-primary-300: var(--clr-primary-900);
+  
+  --status-draft-background-clr: var(--status-draft-background-clr-dark);
+  --status-draft-clr: var(--text-clr-200);
+
+  --text-clr-400: var(--text-clr-200);
+  --text-clr-900: var(--text-clr-100);
 
   // Main header
   .main-page-header {
     background-color: var(--clr-primary-900);
-
-    & .horizontal-line {
-      background-color: var();
-    }
 
     & .theme-icon path {
       fill: var(--icon-color-dark);
@@ -17,30 +24,7 @@
   // Element inside invoice list
   & .invoice-container-mobile,
   & .invoice-container-desktop {
-    background-color: var(--clr-primary-900);
     color: var(--text-clr-100);
-
-    & .invoice-id,
-    & .invoice-wrapper,
-    & .invoice-total {
-      color: var(--text-clr-100);
-    }
-
-    & .invoice-due-date {
-      color: var(--text-clr-200);
-    }
-
-    & .invoice-status-container-draft {
-      background-color: var(--status-draft-background-clr-dark);
-
-      & .invoice-status-circle {
-        background-color: var(--clr-primary-300);
-      }
-
-      & .invoice-status {
-        color: var(--clr-primary-300);
-      }
-    }
   }
 
   // Invoices Filter
@@ -49,20 +33,8 @@
   }
 
   & .invoice-filter-container {
-    & .invoice-filter-header {
-      color: var(--text-clr-100);
-    }
 
     & .invoice-filter-wrapper {
-      & > span {
-        color: var(--text-clr-200);
-      }
-
-      & .filter-container {
-        &-header {
-          color: var(--text-clr-100);
-        }
-      }
 
       & .filter-overlay-wrapper {
         background-color: var(--clr-primary-800);
@@ -75,17 +47,8 @@
     }
   }
 
-  & .custom-checkbox-checkmark {
-    background-color: var(--clr-primary-900);
+  & ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
   }
 
-  // Empty list illustration
-  & .invoices-list-empty-container {
-    & h2 {
-      color: var(--text-clr-100);
-    }
-    & p {
-      color: var(--text-clr-200);
-    }
-  }
 }

@@ -29,19 +29,6 @@
     }
   }
 
-  &-homepage-link {
-    max-width: 45.5rem;
-    padding: unset;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-
-    & h4 {
-      margin-left: 1.5rem;
-    }
-  }
-
   &-status-container {
     display: flex;
     align-items: center;
@@ -284,7 +271,7 @@
     }
 
     &-items-amount-due-container {
-      background-color: var(--text-clr-900);
+      background-color: var(--clr-primary-1000);
 
       & > p {
         color: var(--text-clr-100);

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./build",
     "sourceMap": true,
     "noImplicitAny": true,
@@ -12,8 +13,6 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
   },
   "include": [
     "./src/**/*",

@@ -1,25 +1,41 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'src/store';
+import { filterInvoices } from '../store/slices/invoiceSlice';
+
 import CustomCheckbox from './CustomCheckbox';
-import { FilterStatus, ReducerAction } from '../utils/types';
+
 import { FilterList } from '../utils/constants';
 
 import '../styles/components/filter-option.scss';
 
 interface Props {
   label: keyof typeof FilterList;
-  state: FilterStatus;
-  dispatch: React.Dispatch<ReducerAction>;
 }
 
-const FilterOption = ({ label, dispatch, state }: Props): JSX.Element => {
+const FilterOption = ({ label }: Props): JSX.Element => {
+  const [isChecked, setIsChecked] = useState(true);
+  const filters = useSelector((state: RootState) => state.InvoiceSlice.filters);
+  const dispatch = useDispatch();
+
   const handleCheck = () => {
-    dispatch({ type: 'toggleFilterOption', payload: { [label]: !state[label] } });
+    dispatch(filterInvoices({ ...filters, [label]: !filters[label] }));
   };
 
-  const checked = state[label];
+  useEffect(() => {
+    setIsChecked(filters[label]);
+  }, [filters]);
+
   return (
-    <button type='button' key={label} className='filter-option-container' onClick={handleCheck}>
-      <CustomCheckbox checked={checked} handleCheck={handleCheck} />
+    <button
+      type='button'
+      key={label}
+      className='filter-option-container'
+      onClick={handleCheck}
+    >
+      <CustomCheckbox isChecked={isChecked} handleCheck={handleCheck} />
       <span>{label}</span>
     </button>
   );

@@ -1,0 +1,55 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+
+  &__label {
+    font-size: var(--fs-500);
+    color: var(--text-clr-500);
+    margin-bottom: 0.625rem;
+  }
+
+  &__select {
+    appearance: none;
+    position: relative;
+    background: url('../../../public/icon-arrow-down.svg') no-repeat;
+    background-position: calc(100% - 1rem) 50%;
+  }
+
+  &__input, &__select {
+    font-size: var(--fs-500);
+    font-weight: bold;
+    padding: 1em;
+    color: var(--text-clr-900);
+    background-color: var(--clr-primary-100);
+    border: 1px solid var(--clr-primary-300);
+    border-radius: 4px;
+    width: 100%;
+
+    &:read-only {
+      border: 0;
+      background-color: inherit;
+      color: var(--text-clr-400);
+    }
+
+    &:hover,
+    &:focus {
+      outline-color: var(--clr-primary-600);
+    }
+  }
+
+
+  &__option {
+    display: block;
+    padding: 5rem;
+  }
+}
+
+.theme-dark {
+  & .form-group {
+    &__input, &__select {
+      border-color: var(--clr-primary-800);
+    }
+  }
+} 

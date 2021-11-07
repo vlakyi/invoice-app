@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { InvoiceObjectFormated } from '../utils/types';
+import { InvoiceObjectFormatted } from '../utils/types';
 
 import StatusMarker from './StatusMarker';
 import '../styles/components/invoice-desktop.scss';
@@ -7,7 +7,7 @@ import '../styles/components/invoice-desktop.scss';
 import { ReactComponent as ArrowRight } from '../../public/icon-arrow-right.svg';
 
 interface Props {
-  invoice: InvoiceObjectFormated;
+  invoice: InvoiceObjectFormatted;
 }
 
 const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
@@ -15,7 +15,11 @@ const InvoiceMobile = ({ invoice }: Props): JSX.Element => {
   const history = useHistory();
 
   return (
-    <button type='button' className='invoice-container-desktop' onClick={() => history.push(`/invoice/${id}`)}>
+    <button
+      type='button'
+      className='invoice-container-desktop'
+      onClick={() => history.push(`/invoice/${id}`)}
+    >
       <h4 className='invoice-id'>
         <span>#</span>
         {id}

@@ -1,5 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
-import filterContext from '../context/FilterContext';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+// Redux
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
 import Filter from './Filter';
 import '../styles/components/invoice-filter.scss';
@@ -8,7 +12,10 @@ import { ReactComponent as IconPlus } from '../../public/icon-plus-circular.svg'
 import useViewport from '../hooks/useViewport';
 
 const InvoiceFilter = (): JSX.Element => {
-  const { filteredInvoices, filterState } = useContext(filterContext);
+  const filteredInvoices = useSelector(
+    (state: RootState) => state.InvoiceSlice.filteredInvoices
+  );
+  const filters = useSelector((state: RootState) => state.InvoiceSlice.filters);
   const count = filteredInvoices.length;
 
   const [countMessage, setCountMessage] = useState('');
@@ -20,18 +27,22 @@ const InvoiceFilter = (): JSX.Element => {
     function populateFilterMessage(): string {
       const activeFilters: string[] = [];
 
-      Object.entries(filterState).forEach(([key, value]) => {
+      Object.entries(filters).forEach(([key, value]) => {
         if (value) {
           activeFilters.push(key.toLowerCase());
         }
       });
 
-      return activeFilters.length !== Object.keys(filterState).length ? activeFilters.join(' or ') : 'total';
+      return activeFilters.length !== Object.keys(filters).length
+        ? activeFilters.join(' or ')
+        : 'total';
     }
 
     if (count > 0) {
       if (width >= 768) {
-        setCountMessage(`There are ${count} ${populateFilterMessage()} invoices`);
+        setCountMessage(
+          `There are ${count} ${populateFilterMessage()} invoices`
+        );
       } else {
         setCountMessage(`${count} invoices`);
       }
@@ -49,13 +60,13 @@ const InvoiceFilter = (): JSX.Element => {
 
       <div className='invoice-filter-wrapper'>
         <Filter />
-        <button type='button' className='invoice-filter-new-container'>
+        <Link to='/invoice/new' className='invoice-filter-new-container'>
           <div className='invoice-filter-new-wrapper'>
             <div className='invoice-filter-new-circle' />
             <IconPlus />
           </div>
           <span className='invoice-filter-new-text'>{newButtonText}</span>
-        </button>
+        </Link>
       </div>
     </div>
   );

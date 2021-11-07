@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { InvoiceItemFormated, InvoiceObjectFormated } from '../utils/types';
+import { RouteComponentProps } from 'react-router-dom';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'src/store';
+import { changeInvoiceStatus } from '../store/slices/invoiceSlice';
+
+// Utils
+import { InvoiceItemFormatted, InvoiceObjectFormatted } from '../utils/types';
+import { FilterList } from '../utils/constants';
+
+// Components
 import StatusMarker from '../components/StatusMarker';
 import ViewInvoiceActions from '../components/ViewInvoiceActions';
 
 import useViewport from '../hooks/useViewport';
 
-import { ReactComponent as ArrowLeft } from '../../public/icon-arrow-left.svg';
+import GoBackLink from '../components/GoBackLink';
 
 import '../styles/screens/view-invoice.scss';
 
@@ -16,13 +25,17 @@ interface MatchParams {
 }
 
 interface Props {
-  invoices: InvoiceObjectFormated[] | [];
   routeProps: RouteComponentProps<MatchParams>;
 }
 
-const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
-  const [currentInvoice, setCurrentInvoice] = useState<InvoiceObjectFormated | null>(null);
+const ViewInvoice = ({ routeProps }: Props): JSX.Element => {
+  const [currentInvoice, setCurrentInvoice] =
+    useState<InvoiceObjectFormatted | null>(null);
   const { width } = useViewport();
+  const dispatch = useDispatch();
+  const invoices = useSelector(
+    (state: RootState) => state.InvoiceSlice.invoices
+  );
 
   useEffect(() => {
     if (invoices.length > 0) {
@@ -32,15 +45,23 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
     }
   }, [invoices, routeProps]);
 
+  const markAsPaid = () => {
+    if (currentInvoice) {
+      dispatch(
+        changeInvoiceStatus({
+          invoice: currentInvoice,
+          status: FilterList.Paid,
+        })
+      );
+    }
+  };
+
   return (
     <>
       {currentInvoice ? (
         <section className='view-invoice-wrapper'>
           <article className='view-invoice-container'>
-            <Link to='/' className='view-invoice-homepage-link'>
-              <ArrowLeft />
-              <h4>Go back</h4>
-            </Link>
+            <GoBackLink link='/' />
 
             <section
               className='view-invoice-status-container details-container'
@@ -52,23 +73,36 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
               </div>
               {width >= 768 ? (
                 <div data-testid='view-invoice-status-actions-container'>
-                  <ViewInvoiceActions />
+                  <ViewInvoiceActions markAsPaid={markAsPaid} />
                 </div>
               ) : null}
             </section>
 
-            <section className='view-invoice-section details-container' data-testid='view-invoice-details-container'>
+            <section
+              className='view-invoice-section details-container'
+              data-testid='view-invoice-details-container'
+            >
               <h4 className='view-invoice-id'>
                 <span>#</span>
                 {currentInvoice.id}
               </h4>
-              <p className='view-invoice-description'>{currentInvoice.description}</p>
+              <p className='view-invoice-description'>
+                {currentInvoice.description}
+              </p>
 
               <div className='view-invoice-address-container'>
-                <p className='view-invoice-address-street'>{currentInvoice.senderAddress.street}</p>
-                <p className='view-invoice-address-city'>{currentInvoice.senderAddress.city}</p>
-                <p className='view-invoice-address-postCode'>{currentInvoice.senderAddress.postCode}</p>
-                <p className='view-invoice-address-country'>{currentInvoice.senderAddress.country}</p>
+                <p className='view-invoice-address-street'>
+                  {currentInvoice.senderAddress.street}
+                </p>
+                <p className='view-invoice-address-city'>
+                  {currentInvoice.senderAddress.city}
+                </p>
+                <p className='view-invoice-address-postCode'>
+                  {currentInvoice.senderAddress.postCode}
+                </p>
+                <p className='view-invoice-address-country'>
+                  {currentInvoice.senderAddress.country}
+                </p>
               </div>
 
               <section className='view-invoice-grid-container'>
@@ -86,10 +120,18 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
                   <p>Bill To</p>
                   <h3>{currentInvoice.clientName}</h3>
                   <div className='view-invoice-address-container'>
-                    <p className='view-invoice-address-street'>{currentInvoice.clientAddress.street}</p>
-                    <p className='view-invoice-address-city'>{currentInvoice.clientAddress.city}</p>
-                    <p className='view-invoice-address-postCode'>{currentInvoice.clientAddress.postCode}</p>
-                    <p className='view-invoice-address-country'>{currentInvoice.clientAddress.country}</p>
+                    <p className='view-invoice-address-street'>
+                      {currentInvoice.clientAddress.street}
+                    </p>
+                    <p className='view-invoice-address-city'>
+                      {currentInvoice.clientAddress.city}
+                    </p>
+                    <p className='view-invoice-address-postCode'>
+                      {currentInvoice.clientAddress.postCode}
+                    </p>
+                    <p className='view-invoice-address-country'>
+                      {currentInvoice.clientAddress.country}
+                    </p>
                   </div>
                 </div>
 
@@ -108,21 +150,25 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
                   </header>
                 ) : null}
 
-                {currentInvoice.items.map(({ name, price, quantity, total }: InvoiceItemFormated) => (
-                  <div className='view-invoice-item' key={name + price}>
-                    {width >= 768 ? (
-                      <>
-                        <h4 className='view-invoice-item-price'>{price}</h4>
-                        <h4 className='view-invoice-item-quantity'>{quantity}</h4>
-                      </>
-                    ) : (
-                      <p className='view-invoice-item-amount'>{`${quantity} x ${price}`}</p>
-                    )}
+                {currentInvoice.items.map(
+                  ({ name, price, quantity, total }: InvoiceItemFormatted) => (
+                    <div className='view-invoice-item' key={name + price}>
+                      {width >= 768 ? (
+                        <>
+                          <h4 className='view-invoice-item-price'>{price}</h4>
+                          <h4 className='view-invoice-item-quantity'>
+                            {quantity}
+                          </h4>
+                        </>
+                      ) : (
+                        <p className='view-invoice-item-amount'>{`${quantity} x ${price}`}</p>
+                      )}
 
-                    <h4 className='view-invoice-item-name'>{name}</h4>
-                    <h4 className='view-invoice-item-total'>{total}</h4>
-                  </div>
-                ))}
+                      <h4 className='view-invoice-item-name'>{name}</h4>
+                      <h4 className='view-invoice-item-total'>{total}</h4>
+                    </div>
+                  )
+                )}
               </section>
 
               <section className='view-invoice-items-amount-due-container'>
@@ -133,8 +179,11 @@ const ViewInvoice = ({ invoices, routeProps }: Props): JSX.Element => {
           </article>
 
           {width < 768 ? (
-            <footer className='view-invoice-footer' data-testid='view-invoice-footer'>
-              <ViewInvoiceActions />
+            <footer
+              className='view-invoice-footer'
+              data-testid='view-invoice-footer'
+            >
+              <ViewInvoiceActions markAsPaid={markAsPaid} />
             </footer>
           ) : null}
         </section>

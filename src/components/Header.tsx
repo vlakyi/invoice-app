@@ -14,9 +14,17 @@ const Header = (): JSX.Element => {
       <Logo />
       <section>
         {isDark ? (
-          <SunIcon onClick={toggleTheme} className='theme-icon' data-testid='sun-icon' />
+          <SunIcon
+            onClick={toggleTheme}
+            className='theme-icon'
+            data-testid='sun-icon'
+          />
         ) : (
-          <MoonIcon onClick={toggleTheme} className='theme-icon' data-testid='moon-icon' />
+          <MoonIcon
+            onClick={toggleTheme}
+            className='theme-icon'
+            data-testid='moon-icon'
+          />
         )}
         <div className='horizontal-line' />
         <img src={avatarUrl} alt='avatar icon' />

@@ -1,26 +1,55 @@
 import '@testing-library/jest-dom';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '../../tests/setup';
+import { RootState, initialState } from '../store';
+import MainScreen from '../screens/MainScreen';
 
-import App from '../components/App';
+import invoices from '../../data.json';
+import { formatInvoices } from '../utils/api';
 
-it('renders App with Filter Component', () => {
-  const { getByText, queryByTestId, getByTestId } = render(<App />);
+const state: RootState = {
+  ...initialState,
+  InvoiceSlice: {
+    ...initialState.InvoiceSlice,
+    invoices: formatInvoices(invoices),
+  },
+};
+
+it('renders MainScreen with Filter Component', async () => {
+  const { getByText, queryByText, queryByTestId, getByTestId } = render(
+    <MainScreen />,
+    undefined,
+    state
+  );
+
   const filterHeader = getByText(/Filter/);
-  expect(filterHeader).toBeInTheDocument();
 
-  // Test filter toggle
-  expect(queryByTestId('filter-overlay')).toBeNull();
+  await waitFor(() => {
+    expect(queryByText(/Filter/)).not.toBeNull();
+  });
+
+  // filter is closed
+  expect(queryByTestId('filter-overlay')).not.toBeInTheDocument();
+
+  // try to toggle filter
   fireEvent.click(filterHeader);
-  const filterOverlay = getByTestId('filter-overlay');
-  expect(filterOverlay).toBeInTheDocument();
-  expect(filterOverlay.children.length).toBeGreaterThan(0);
+
+  await waitFor(() => {
+    const filterOverlay = getByTestId('filter-overlay');
+    expect(filterOverlay).toBeInTheDocument();
+    expect(filterOverlay.children.length).toBeGreaterThan(0);
+  });
 
   // Test invoices filtering
-  const invoicesCount = getByTestId('invoices-list').children.length;
-  fireEvent.click(filterOverlay.children[0]);
-  expect(getByTestId('invoices-list').children.length).toBeLessThan(invoicesCount);
+  await waitFor(() => {
+    const invoicesCount = getByTestId('invoices-list').children.length;
+
+    fireEvent.click(getByTestId('filter-overlay').children[0]);
+    expect(getByTestId('invoices-list').children.length).toBeLessThan(
+      invoicesCount
+    );
+  });
 
   // Close invoices on mouse down outside
   fireEvent.mouseDown(document);
-  expect(queryByTestId('filter-overlay')).toBeNull();
+  await waitFor(() => expect(queryByTestId('filter-overlay')).toBeNull());
 });

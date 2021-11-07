@@ -1,38 +1,62 @@
 import '@testing-library/jest-dom';
-import { render, act } from '@testing-library/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { render, waitFor, windowResize, act } from '../../tests/setup';
+import { RootState, initialState } from '../store';
 import ViewInvoice from '../screens/ViewInvoice';
 
-import dataJSON from '../../data.json';
+import invoices from '../../data.json';
 import { formatInvoices } from '../utils/api';
-import { windowResize } from '../../tests/setup';
 
-const formattedInvoices = formatInvoices(dataJSON);
+const state: RootState = {
+  ...initialState,
+  InvoiceSlice: {
+    ...initialState.InvoiceSlice,
+    invoices: formatInvoices(invoices),
+  },
+};
 
-it('renders View Invoice component for desktop veiw', () => {
-  const { getByText, getByTestId, queryByTestId } = render(
-    <MemoryRouter initialEntries={['/invoice/XM9141']}>
-      <Route path='/invoice/:id' render={(props) => <ViewInvoice invoices={formattedInvoices} routeProps={props} />} />
-    </MemoryRouter>
+it('renders View Invoice component for desktop view', async () => {
+  const { getByTestId, queryByTestId, getByText } = render(
+    <Route
+      path='/invoice/:id'
+      render={(props) => {
+        return <ViewInvoice routeProps={props} />;
+      }}
+    />,
+    {
+      MemoryRouterOptions: { initialEntries: ['/invoice/XM9141'] },
+    },
+    state
   );
 
-  expect(getByText('Go back')).toBeInTheDocument();
-  expect(getByText('Mark as Paid')).toBeInTheDocument();
+  await waitFor(() => {
+    expect(getByText('Go back')).toBeInTheDocument();
+    expect(getByText('Mark as Paid')).toBeInTheDocument();
 
-  expect(getByTestId('view-invoice-status-container')).toBeInTheDocument();
-  expect(getByTestId('view-invoice-details-container')).toBeInTheDocument();
+    expect(getByTestId('view-invoice-status-container')).toBeInTheDocument();
+    expect(getByTestId('view-invoice-details-container')).toBeInTheDocument();
 
-  // In thedesktop view actions buttons should be inside status container instead of footer;
-  expect(getByTestId('view-invoice-status-actions-container')).toBeInTheDocument();
-  expect(queryByTestId('view-invoice-footer')).toBeNull();
+    // In the desktop view actions buttons should be inside status container instead of footer;
+    expect(
+      getByTestId('view-invoice-status-actions-container')
+    ).toBeInTheDocument();
+    expect(queryByTestId('view-invoice-footer')).toBeNull();
+  });
 });
 
-it('renders View Invoice component for mobile veiw', () => {
+it('renders View Invoice component for mobile view', () => {
   act(() => windowResize(360));
-  const { getByText, queryByText, getByTestId, queryByTestId } = render(
-    <MemoryRouter initialEntries={['/invoice/XM9141']}>
-      <Route path='/invoice/:id' render={(props) => <ViewInvoice invoices={formattedInvoices} routeProps={props} />} />
-    </MemoryRouter>
+  const { getByTestId, queryByTestId, queryByText, getByText } = render(
+    <Route
+      path='/invoice/:id'
+      render={(props) => {
+        return <ViewInvoice routeProps={props} />;
+      }}
+    />,
+    {
+      MemoryRouterOptions: { initialEntries: ['/invoice/XM9141'] },
+    },
+    state
   );
 
   expect(getByText('Go back')).toBeInTheDocument();
