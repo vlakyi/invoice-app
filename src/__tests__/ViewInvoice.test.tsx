@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { Route } from 'react-router-dom';
 import { render, waitFor, windowResize, act } from '../../tests/setup';
-// import { render } from '@testing-library/react';
 import { RootState, initialState } from '../store';
 import ViewInvoice from '../screens/ViewInvoice';
 
@@ -17,7 +16,7 @@ const state: RootState = {
 };
 
 it('renders View Invoice component for desktop view', async () => {
-  const { getByTestId, queryByTestId, findByText, getByText } = render(
+  const { getByTestId, queryByTestId, getByText } = render(
     <Route
       path='/invoice/:id'
       render={(props) => {
@@ -30,7 +29,6 @@ it('renders View Invoice component for desktop view', async () => {
     state
   );
 
-  // initialEntries={['/invoice/XM9141']}
   await waitFor(() => {
     expect(getByText('Go back')).toBeInTheDocument();
     expect(getByText('Mark as Paid')).toBeInTheDocument();
