@@ -10,17 +10,16 @@
 .logo {
   &-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 4.5rem;
     height: 4.5rem;
     cursor: pointer;
-
-    img {
-      position: absolute;
-      width: 1.75rem;
-    }
+  }
+  &-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.75rem;
   }
 
   &-box:first-of-type {

@@ -27,7 +27,7 @@ const Header = (): JSX.Element => {
           />
         )}
         <div className='horizontal-line' />
-        <img src={avatarUrl} alt='avatar icon' />
+        <img src={avatarUrl} alt='avatar icon' className='avatar-icon' />
       </section>
     </header>
   );
