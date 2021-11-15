@@ -1,14 +1,15 @@
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
-const paths = require('./paths');
+const webpack = require("webpack");
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
+const paths = require("./paths");
+const path = require('path');
 
 module.exports = merge(common, {
   // Set the mode to development or production
-  mode: 'development',
+  mode: "development",
 
   // Control how source maps are generated
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
 
   // Spin up a server for quick development
   devServer: {
@@ -17,7 +18,7 @@ module.exports = merge(common, {
     open: true,
     compress: true,
     hot: true,
-    port: 8080
+    port: 8080,
   },
 
   module: {
@@ -26,25 +27,47 @@ module.exports = merge(common, {
       {
         test: /\.module.(s(a|c)ss)$/,
         use: [
-          'style-loader',
-          { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1, modules: true } },
-          { loader: 'sass-loader', options: { sourceMap: true } }
-        ]
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { sourceMap: true, importLoaders: 1, modules: true },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                config: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
+          { loader: "sass-loader", options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.(s(a|c)ss)$/,
         exclude: /\.module.(s(a|c)ss)$/,
         use: [
-          'style-loader',
-          { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1, modules: false } },
-          { loader: 'sass-loader', options: { sourceMap: true } }
-        ]
-      }
-    ]
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { sourceMap: true, importLoaders: 1, modules: false },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                config: path.resolve(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
+          { loader: "sass-loader", options: { sourceMap: true } },
+        ],
+      },
+    ],
   },
 
   plugins: [
     // Only update what has changed on hot reload
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 });

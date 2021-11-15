@@ -12,7 +12,7 @@ const Logo = (): JSX.Element => {
     >
       <div className='logo-box' />
       <div className='logo-box' />
-      <img src={LogoIcon} alt='logo' />
+      <img src={LogoIcon} alt='logo' className='logo-image' />
     </button>
   );
 };
