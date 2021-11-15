@@ -14,8 +14,12 @@
     "test:ci": "jest --forceExit --detectOpenHandles --maxWorkers=10"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx,js,jsx}": ["npm run lint:staged"],
-    "*.{scss,css}": ["stylelint --fix"]
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint:staged"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix"
+    ]
   },
   "jest": {
     "preset": "ts-jest",
@@ -71,6 +75,8 @@
     "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^1.0.0",
     "node-sass": "^6.0.0",
+    "postcss-loader": "^6.2.0",
+    "postcss-preset-env": "^6.7.0",
     "prettier": "^2.2.1",
     "react-test-renderer": "^17.0.2",
     "sass-loader": "^11.0.1",
