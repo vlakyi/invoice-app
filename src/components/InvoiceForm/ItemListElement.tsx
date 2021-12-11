@@ -35,7 +35,9 @@ const ItemListElement = ({ item, dispatch }: Props): JSX.Element => {
   ) => {
     const { value } = event.target;
 
-    setItemObject({ ...itemObject, [variableName]: value });
+    setItemObject((prevState) => {
+      return { ...prevState, [variableName]: value };
+    });
   };
 
   // format and dispatch on the input blur
@@ -53,7 +55,10 @@ const ItemListElement = ({ item, dispatch }: Props): JSX.Element => {
       result = parseInt(value, 10) || 0;
     }
 
-    setItemObject({ ...itemObject, [variableName]: result });
+    setItemObject((prevState) => {
+      return { ...prevState, [variableName]: result };
+    });
+
     dispatch({
       type: 'update',
       payload: { ...itemObject, [variableName]: result },
